@@ -327,6 +327,16 @@ export class REBuilder {
     )
   }
 
+  get_fuzzy_link_test () {
+    // Quick deny for `get_fuzzy_link_search()`: every fuzzy link host is an
+    // IPv4 address or ends with `.` + TLD before the host terminator.
+    return this.cache.link_fuzzy_test ??= new RegExp(
+      (this.opts.fuzzyIP ? this.get_ipv4_addr().source + '|' : '') +
+      `\\.(?:${this.get_tld().source})(?=$|${this.get_text_separators().source}|${this.src_ZPCc})`,
+      'i'
+    )
+  }
+
   get_http_validator () {
     return this.cache.http_validator ??= new RegExp(
       '\\/\\/' +

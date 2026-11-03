@@ -280,7 +280,7 @@ export class LinkifyIt {
       if (this.testSchemaAt(text, m[2], re.lastIndex)) { return true }
     }
 
-    if (this.__opts__.fuzzyLink && this.__schemas__['http:']) {
+    if (this.__opts__.fuzzyLink && this.__schemas__['http:'] && this.re.get_fuzzy_link_test().test(text)) {
       // guess schemaless links
       re = this.re.get_fuzzy_link_search()
       re.lastIndex = 0
